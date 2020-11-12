@@ -50,6 +50,7 @@ namespace DGSappSem2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public ActionResult Create([Bind(Include = "AssessmentID,AssessmentName,ContributionPercent,TermID,SubjectID")] Assessment assessment)
         {
             ViewBag.SubjectID = new SelectList(db.Subjects, "SubjectID", "SubjectName");
