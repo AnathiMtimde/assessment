@@ -1,0 +1,42 @@
+﻿@model DGSappSem2.Models.Events.BookEvent
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BookEvent</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantiy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantiy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateBookinFor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateBookinFor)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BookEventId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

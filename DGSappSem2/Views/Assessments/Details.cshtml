@@ -1,0 +1,50 @@
+﻿@model AssessmentBusiness.Assessment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Assessment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject.SubjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject.SubjectName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Term.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Term.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssessmentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssessmentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContributionPercent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContributionPercent)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AssessmentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DGSappSem2.Models.Events.BookEvent>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Venue.venueName)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Quantiy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RefNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateBookinFor)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.Venue.venueName)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.Quantiy)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RefNum)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DateBookinFor)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.BookEventId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.BookEventId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.BookEventId })
+    </td>
+</tr>
+}
+
+</table>

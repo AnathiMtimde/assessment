@@ -1,0 +1,116 @@
+﻿@model DGSappSem2.Models.Staffs.Staff
+
+@{
+    ViewBag.Title = "Create QR Card";
+}
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+
+
+    <style>
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+            max-width: 300px;
+            margin: auto;
+            text-align: center;
+            font-family: arial;
+           
+        }
+
+        .title {
+            color: grey;
+            font-size: 18px;
+        }
+
+        button {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 8px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 22px;
+            color: black;
+        }
+
+            button:hover, a:hover {
+                opacity: 0.7;
+            }
+    </style>
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+
+            image.src = URL.createObjectURL(event.target.files[0]);
+
+        };
+    </script>
+
+</head>
+
+<body>
+
+    <h2 style="text-align:center">Create user QR Card</h2>
+    <div class="w3-container w3-center">
+        <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;"></p>
+        <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
+    </div>
+    <div class="card">
+        <img id="output" style="width:100%">
+        <h1>@ViewBag.Name</h1>
+        <p class="title">Teacher of </p>
+        <p>Durban Girls Secondary School</p>
+
+        @using (Html.BeginForm("Details", "Staffs", FormMethod.Post))
+
+        {
+
+
+
+
+
+            <div class="col-md-3">
+
+                <img src="@ViewBag.Url" width="80px" height="80px" alt="Image" />
+
+            </div>
+            <p><button>@ViewBag.Con</button></p>
+            <input type="submit" id="btnGenerate" value="Generate" class="btn btn-default" />
+
+        }
+
+    </div>
+    <div class="w3-container w3-center">
+        @Html.ActionLink("Print QR Card", "Print")
+    </div>
+</body>
+
+</html>
+<div> @Html.ActionLink("Retrun to records", "Index")</div>

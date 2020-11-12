@@ -1,0 +1,44 @@
+﻿@model IEnumerable<DGSappSem2.Models.Staffs.StaffAttendance>
+
+@{
+    ViewBag.Title = "Attendance Record";
+}
+
+<h2>Staff Attendance Record</h2>
+
+<p>
+    @Html.ActionLink("Scan QR Code", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StaffAttName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Staffrecord)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GetDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffAttName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Staffrecord)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GetDate)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.StaffAttendanceId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StaffAttendanceId })
+        </td>
+    </tr>
+}
+
+</table>

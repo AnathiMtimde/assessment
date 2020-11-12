@@ -1,0 +1,66 @@
+﻿@model DGSappSem2.Models.Events.Event
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Event</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.eventName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eventName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.venueId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.venueId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eventDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eventDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eventStartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eventStartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eventEndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eventEndTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.eventID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AssessmentBusiness.StudentClassRoom>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassRoom.GradeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.StudentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClassRoom.GradeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.StudentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.StudentClassRoomID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.StudentClassRoomID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StudentClassRoomID })
+        </td>
+    </tr>
+}
+
+</table>

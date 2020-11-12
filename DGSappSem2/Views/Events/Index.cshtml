@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DGSappSem2.Models.Events.Event>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.eventName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.venueId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.eventDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.eventStartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.eventEndTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.eventName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.venueId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookingPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.eventDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.eventStartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.eventEndTime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.eventID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.eventID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.eventID })
+        </td>
+    </tr>
+}
+
+</table>

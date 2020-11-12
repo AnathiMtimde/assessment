@@ -1,0 +1,61 @@
+﻿@model DGSappSem2.Models.FileUpload.FileUpload
+
+@{
+    ViewBag.Title = "File Upload & Download";
+}
+
+@using (Html.BeginForm("Index", "FileUpload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-10">
+            <h2>File Upload</h2>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Upload Image</label>
+                <div class="col-md-10">
+                    <input type="file" id="files" name="files" class="form-control" required="required"><br />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Upload" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h2>Uploaded File Details</h2>
+        <div class="form-group">
+            <div>
+                @{
+                    var grid = new WebGrid(source: Model.FileList, canPage: true, rowsPerPage: 15);
+                    @grid.GetHtml(tableStyle: "table table-striped table-bordered table-hover", headerStyle: "webgrid-header",
+                        alternatingRowStyle: "webgrid-alternating-row", selectedRowStyle: "webgrid-selected-row",
+                        footerStyle: "webgrid-footer", rowStyle: "webgrid-row-style", mode: WebGridPagerModes.All,
+                        firstText: "<< First", previousText: "< Prev", nextText: "Next >", lastText: "Last >>",
+                        htmlAttributes: new { id = "DataTable" },
+                        columns: grid.Columns(
+                            //grid.Column("FileId", header: "FILE ID", canSort: false),
+                            grid.Column("FileName", header: "FILE NAME", canSort: false),
+                            grid.Column("FileUrl", header: "FILE PATH", canSort: false),
+                            grid.Column(header: "DOWNLOAD", format:
+                                            @<text>
+                                                <a href="~/DownloadFile?filePath=@item.FileUrl"><img src="~/Images/download.png" style="width: 15px; height: 15px" title="Download" /></a>
+                                            </text>)
+                ));
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+} 

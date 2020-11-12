@@ -1,0 +1,6 @@
+C:\Users\KGClass\Desktop\School\AssesmentBusiness\bin\Debug\AssesmentBusiness.dll
+C:\Users\KGClass\Desktop\School\AssesmentBusiness\bin\Debug\AssesmentBusiness.pdb
+C:\Users\KGClass\Desktop\School\AssesmentBusiness\obj\Debug\AssesmentBusiness.csprojAssemblyReference.cache
+C:\Users\KGClass\Desktop\School\AssesmentBusiness\obj\Debug\AssesmentBusiness.csproj.CoreCompileInputs.cache
+C:\Users\KGClass\Desktop\School\AssesmentBusiness\obj\Debug\AssesmentBusiness.dll
+C:\Users\KGClass\Desktop\School\AssesmentBusiness\obj\Debug\AssesmentBusiness.pdb

@@ -1,0 +1,122 @@
+﻿@model DGSappSem2.Models.Students.Student
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentSurname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentSurname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentGender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentGender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentTown)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentTown)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentContact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentContact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentGrade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentGrade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentBirthCertURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentBirthCertURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentReportURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentReportURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentProofResURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentProofResURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentPermitURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentPermitURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentAllowReg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentAllowReg)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

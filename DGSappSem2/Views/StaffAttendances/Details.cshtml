@@ -1,0 +1,42 @@
+﻿@model DGSappSem2.Models.Staffs.StaffAttendance
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>StaffAttendance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StaffAttName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StaffAttName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Staffrecord)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Staffrecord)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GetDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GetDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StaffAttendanceId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

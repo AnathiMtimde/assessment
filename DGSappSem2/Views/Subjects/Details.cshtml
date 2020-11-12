@@ -1,0 +1,42 @@
+﻿@model AssesmentBusiness.Subject
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Subject</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClassRoom.GradeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClassRoom.GradeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubjectName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequiredPercentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequiredPercentage)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SubjectID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
