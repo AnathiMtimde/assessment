@@ -1,0 +1,45 @@
+﻿@model IEnumerable<DGSappSem2.Models.StudentAssessment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Assessment.AssessmentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.StudentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mark)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assessment.AssessmentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.StudentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mark)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.StudentAssesmentID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.StudentAssesmentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StudentAssesmentID })
+        </td>
+    </tr>
+}
+
+</table>

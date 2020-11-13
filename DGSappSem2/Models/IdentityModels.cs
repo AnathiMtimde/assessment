@@ -1,13 +1,13 @@
 ﻿using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using DGSappSem2.Models.Reports;
 using DGSappSem2.Models.Staffs;
 using DGSappSem2.Models.Students;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using DGSappSem2.Models.Events;
 using AssessmentBusiness;
+using DGSappSem2.Models.AssessmentBusiness;
 
 namespace DGSappSem2.Models
 {
@@ -32,10 +32,7 @@ namespace DGSappSem2.Models
         public System.Data.Entity.DbSet<DGSappSem2.Models.FileUpload.FileUploadModel> fileUploadModel { get; set; }
 
         public DbSet<Student> students { get; set; }
-        public DbSet<Staff> Staffs { get; set; }
-       
-        public DbSet<Report> Reports { get; set; }
-      
+        public DbSet<Staff> Staffs { get; set; }      
        
         //___________________Assessmentbusiness___________________
         public DbSet<Subject> Subjects { get; set; }
@@ -46,8 +43,11 @@ namespace DGSappSem2.Models
         public DbSet<Assessment> Assessments { get; set; }
         public DbSet<Term> Terms { get; set; }
 
+        public DbSet<StudentAssessment> StudentAssessments { get; set; }
+        public DbSet<Report> Reports { get; set; }
+      
         //__________________AssessmentBusiness____________________
-        public DbSet<SubjectReport> SubjectReports { get; set; }
+       
 
         //Event Database
         public DbSet<Event> Events { get; set; }

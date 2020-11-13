@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DGSappSem2.Models.Staffs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace AssessmentBusiness
         public int RoomNumber { get; set; }
         public virtual ICollection<StudentClassRoom> StudentClassRooms { get; set; }
         public virtual ICollection<Subject> Subjects { get; set; }
+        public virtual ICollection<Staff> Staffs { get; set; }
     }
 }

@@ -69,5 +69,6 @@ namespace DGSappSem2.Models.Students
         public bool StudentAllowReg { get; set; }
 
         public virtual ICollection<StudentClassRoom> StudentClassRooms { get; set; }
+        public virtual ICollection<StudentAssessment> StudentAssessments { get; set; }
     }
 }

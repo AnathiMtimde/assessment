@@ -193,8 +193,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\StaffAttendancesController.cs" />
     <Compile Include="Controllers\StaffsController.cs" />
+    <Compile Include="Controllers\StudentAssessmentsController.cs" />
     <Compile Include="Controllers\StudentClassRoomsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\SubjectsController.cs" />
@@ -218,6 +220,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AssessmentBusiness\Assessment.cs" />
+    <Compile Include="Models\AssessmentBusiness\Report.cs" />
     <Compile Include="Models\AssessmentBusiness\StudentViewModel.cs" />
     <Compile Include="Models\AssessmentBusiness\ClassRoom.cs" />
     <Compile Include="Models\AssessmentBusiness\Term.cs" />
@@ -234,8 +237,13 @@
     <Compile Include="Models\Staffs\Staff.cs" />
     <Compile Include="Models\Staffs\StaffAttendance.cs" />
     <Compile Include="Models\AssessmentBusiness\StudentClassRoom.cs" />
+    <Compile Include="Models\StudentAssessment.cs" />
     <Compile Include="Models\Students\Student.cs" />
     <Compile Include="Models\AssessmentBusiness\Subject.cs" />
+    <Compile Include="Models\ViewModel\AssessmentList.cs" />
+    <Compile Include="Models\ViewModel\ClassRoomList.cs" />
+    <Compile Include="Models\ViewModel\ClassRoomSubjectList.cs" />
+    <Compile Include="Models\ViewModel\TermList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -353,6 +361,16 @@
     <Content Include="Views\Terms\Details.cshtml" />
     <Content Include="Views\Terms\Edit.cshtml" />
     <Content Include="Views\Terms\Index.cshtml" />
+    <Content Include="Views\StudentAssessments\Create.cshtml" />
+    <Content Include="Views\StudentAssessments\Delete.cshtml" />
+    <Content Include="Views\StudentAssessments\Details.cshtml" />
+    <Content Include="Views\StudentAssessments\Edit.cshtml" />
+    <Content Include="Views\StudentAssessments\Index.cshtml" />
+    <Content Include="Views\Reports\Create.cshtml" />
+    <Content Include="Views\Reports\Delete.cshtml" />
+    <Content Include="Views\Reports\Details.cshtml" />
+    <Content Include="Views\Reports\Edit.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

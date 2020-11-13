@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DGSappSem2.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,5 +17,7 @@ namespace AssessmentBusiness
         public virtual Term Term { get; set; }
         public int SubjectID { get; set; }
         public virtual Subject Subject { get; set; }
+
+        public virtual ICollection<StudentAssessment> StudentAssessments { get; set; }
     }
 }

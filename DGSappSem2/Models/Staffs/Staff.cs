@@ -5,7 +5,8 @@ using System.Web;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-
+using DGSappSem2.Models.AssessmentBusiness;
+using AssessmentBusiness;
 
 namespace DGSappSem2.Models.Staffs
 {
@@ -54,13 +55,17 @@ namespace DGSappSem2.Models.Staffs
         [Required(ErrorMessage = "Enter staff's position")]
         public string Position { get; set; }
 
+        public virtual ICollection<Report> Reports { get; set; }
+        public int ClassRoomID { get; set; }
+        public virtual ClassRoom ClassRoom { get; set; }
+
         //public int SubjectID { get; set; }
         //public virtual Subject Subjects { get; set; }
 
         //[Required(ErrorMessage = "Enter staff's salary")]
         //public string Salary { get; set; }
 
-      
+
 
     }
 }

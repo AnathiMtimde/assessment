@@ -6,35 +6,49 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+<link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    
+    <div class="sidenav">
+        @{
+            var classRoomList = @DGSappSem2.Models.AssessmentBusiness.StudentViewModel.getClassRoomList();
+
+        }
+
+        @foreach (var item in classRoomList)
+        {
+            <button class="dropdown-btn">
+                @item.GradeName
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                @foreach (var itemSubject in item.ClassRoomSubjectLists)
+                {< <button class="dropdown-btn">
+                        @itemSubject.SubjectName
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                   <div class="dropdown-container">
+                       @foreach (var itemTerm in itemSubject.TermLists)
+                       {< <button class="dropdown-btn">
+                               Term  @itemTerm.Name
+                               <i class="fa fa-caret-down"></i>
+                           </button>
+                          <div class="dropdown-container">
+                              @foreach (var itemAssessment in itemTerm.AssessmentLists)
+                              {< <button class="dropdown-btn">
+                                        @itemAssessment.AssessmentName
+                                      <i class="fa fa-caret-down"></i>
+                                  </button>
+                              }
+                              </div>
+                               }
+                           </div>
+                       }
+                   </div>
+                }
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Manage Staff", "Index", "Staffs")</li>
-                    <li>@Html.ActionLink("Track Staff Attendance", "Index", "StaffAttendances")</li>
-                    <li>@Html.ActionLink("Assessment Upload", "Index", "FileUpload")</li>
-                    <li>@Html.ActionLink("Class Room", "Index", "ClassRooms")</li>
-                    <li>@Html.ActionLink("Student Class Room", "Index", "StudentClassRooms")</li>
-                    <li>@Html.ActionLink("Student", "Index", "Students")</li>
-                    <li>@Html.ActionLink("Subject", "Index", "Subjects")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
+    <div  class="container main body-content">
         @RenderBody()
         <hr />
         <footer>
@@ -47,3 +61,21 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+<script>
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });
+}
+</script>
