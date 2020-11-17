@@ -37,7 +37,10 @@
                           <div class="dropdown-container">
                               @foreach (var itemAssessment in itemTerm.AssessmentLists)
                               {< <button class="dropdown-btn">
-                                        @itemAssessment.AssessmentName
+                                     <a href="@Url.Action("Create","StudentAssessments", new { classroomId = item.ClassRoomID, assessmentId = itemAssessment.AssessmentID })">
+                                         @itemAssessment.AssessmentName
+                                     </a>         
+                             
                                       <i class="fa fa-caret-down"></i>
                                   </button>
                               }

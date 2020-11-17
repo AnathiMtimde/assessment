@@ -15,6 +15,9 @@ namespace DGSappSem2.Models.AssessmentBusiness
         public string StudentSurname { get; set; }
         public string StudentGrade { get; set; }
         public bool SelectGrade { get; set; }
+        public int Mark { get; set; }
+        public int AssessmentId { get; set; }
+
         public static List<ClassRoomList> getClassRoomList()
         {
             var db = new ApplicationDbContext();

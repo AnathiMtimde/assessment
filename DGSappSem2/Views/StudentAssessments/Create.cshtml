@@ -1,56 +1,111 @@
-﻿@model DGSappSem2.Models.StudentAssessment
+﻿@model List<DGSappSem2.Models.AssessmentBusiness.StudentViewModel>
 
 @{
+
     ViewBag.Title = "Create";
 }
+<script src="~/Scripts/jquery-3.1.1.js"></script>
 
-<h2>Create</h2>
+<h2> @ViewBag.AssessmentName </h2>
+<br />
+<h3>@ViewBag.GradeName / @ViewBag.Subject / Term @ViewBag.Term /</h3>
+<br />
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "StudentAssessments", FormMethod.Post))
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>StudentAssessment</h4>
-        <hr />
+
+    <input id="AssessmentId"
+           name="AssessmentId"
+           type="hidden"
+           value=@ViewBag.AssessmentId /> 
+           
+     <input id="ClassroomId"
+           name="ClassroomId"
+           type="hidden"
+           value= @ViewBag.ClassroomId />
+
+    <div class="form-group">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.StID, "StID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("StID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.StID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <table class="table">
+            <tr>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.AssessmentID, "AssessmentID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("AssessmentID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.AssessmentID, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Mark, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Mark, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Mark, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <th>
+                    @Html.DisplayName("Student ID")
+                </th>
 
+                <th>
+                    @Html.DisplayName("Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Surname")
+                </th>
+                <th>
+                    @Html.DisplayName("Provide Mark")
+                </th>
+
+            </tr>
+
+
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+
+
+                    @Html.HiddenFor(model => model[i].StID)
+                    @Html.HiddenFor(model => model[i].AssessmentId)
+
+
+                    <td>
+                        @Html.DisplayFor(model => model[i].StID)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model[i].StudentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model[i].StudentSurname)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model[i].Mark)
+                    </td>
+                </tr>
+            }
+
+        </table>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Submit Mark" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<script>
+    function bs_input_file() {
+        $(".input-file").before(
+            function () {
+                if (!$(this).prev().hasClass('input-ghost')) {
+                    var element = $("<input type='file' id='dataFile' name='upload' class='input-ghost' style='visibility:hidden; height:0'>");
+                    element.attr("name", $(this).attr("name"));
+                    element.change(function () {
+                        element.next(element).find('input').val((element.val()).split('\\').pop());
+                    });
+                    $(this).find("button.btn-choose").click(function () {
+                        element.click();
+                    });
+                    $(this).find("button.btn-reset").click(function () {
+                        element.val(null);
+                        $(this).parents(".input-file").find('input').val('');
+                    });
+                    $(this).find('input').css("cursor", "pointer");
+                    $(this).find('input').mousedown(function () {
+                        $(this).parents('.input-file').prev().click();
+                        return false;
+                    });
+                    return element;
+                }
+            }
+        );
+    }
+</script>

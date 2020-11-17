@@ -17,6 +17,7 @@ namespace AssessmentBusiness
         public virtual Term Term { get; set; }
         public int SubjectID { get; set; }
         public virtual Subject Subject { get; set; }
+        public int TotalMark { get; set; }
 
         public virtual ICollection<StudentAssessment> StudentAssessments { get; set; }
     }

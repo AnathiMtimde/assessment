@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DGSappSem2.Models;
+using DGSappSem2.Models.AssessmentBusiness;
 
 namespace DGSappSem2.Controllers
 {
@@ -37,30 +38,58 @@ namespace DGSappSem2.Controllers
         }
 
         // GET: StudentAssessments/Create
-        public ActionResult Create()
+        public ActionResult Create(int classroomId, int assessmentId)
         {
-            ViewBag.AssessmentID = new SelectList(db.Assessments, "AssessmentID", "AssessmentName");
-            ViewBag.StID = new SelectList(db.students, "StID", "StudentName");
-            return View();
+            ViewBag.ClassroomId = classroomId;
+            ViewBag.AssessmentId = assessmentId;
+            ViewBag.AssessmentName = db.Assessments.Where(c => c.AssessmentID == assessmentId).Select(c=>c.AssessmentName).FirstOrDefault();
+            ViewBag.GradeName = db.ClassRooms.Where(d => d.ClassRoomID == classroomId).Select(d => d.GradeName).FirstOrDefault();
+            ViewBag.Subject = db.Assessments.Where(d => d.AssessmentID == assessmentId).Select(d => d.Subject.SubjectName).FirstOrDefault();
+            ViewBag.Term = db.Assessments.Where(d => d.AssessmentID == assessmentId).Select(d => d.Term.Name).FirstOrDefault();
+            return View(GetStudents(classroomId,assessmentId));
         }
 
         // POST: StudentAssessments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudentAssesmentID,StID,AssessmentID,Mark")] StudentAssessment studentAssessment)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create(List<StudentViewModel> studentVms, int classroomId, int assessmentId)
         {
-            if (ModelState.IsValid)
+            var nullMark = false;
+            var totalMark = db.Assessments.Where(h => h.AssessmentID == assessmentId).Select(h => h.TotalMark).FirstOrDefault();
+            foreach (var item in studentVms)
             {
-                db.StudentAssessments.Add(studentAssessment);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (item.Mark<0 || totalMark <item.Mark)
+                {
+                    nullMark = true;
+                }
             }
+            if (!nullMark)
+            {
+                foreach (var item in studentVms)
+                {
+                    var studentAssessment = new StudentAssessment();
+                    studentAssessment.StID = item.StID;
+                    studentAssessment.AssessmentID = item.AssessmentId;
+                    studentAssessment.Mark = item.Mark;
+                    db.StudentAssessments.Add(studentAssessment);
+                    db.SaveChanges();
+                }
+            }
+            else
+            {
+                ViewBag.ClassroomId = classroomId;
+                ViewBag.AssessmentId = assessmentId;
+                ViewBag.AssessmentName = db.Assessments.Where(c => c.AssessmentID == assessmentId).Select(c => c.AssessmentName).FirstOrDefault();
+                ViewBag.GradeName = db.ClassRooms.Where(d => d.ClassRoomID == classroomId).Select(d => d.GradeName).FirstOrDefault();
+                ViewBag.Subject = db.Assessments.Where(d => d.AssessmentID == assessmentId).Select(d => d.Subject.SubjectName).FirstOrDefault();
+                ViewBag.Term = db.Assessments.Where(d => d.AssessmentID == assessmentId).Select(d => d.Term.Name).FirstOrDefault();
 
-            ViewBag.AssessmentID = new SelectList(db.Assessments, "AssessmentID", "AssessmentName", studentAssessment.AssessmentID);
-            ViewBag.StID = new SelectList(db.students, "StID", "StudentName", studentAssessment.StID);
-            return View(studentAssessment);
+                ModelState.AddModelError("", "A mark cannot be less than zero or greater than the total mark : " +totalMark);
+                return View(GetStudents(classroomId,assessmentId));
+            }
+            return RedirectToAction("Index");
         }
 
         // GET: StudentAssessments/Edit/5
@@ -131,6 +160,23 @@ namespace DGSappSem2.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public List<StudentViewModel> GetStudents(int classroomId, int assessmentId)
+        {
+            var stdList = new List<StudentViewModel>();
+            var classroomStudents = db.StudentClassRooms.Where(c => c.ClassRoomID == classroomId).Select(c => c.StID).ToList();
+            foreach (var studentId in classroomStudents)
+            {
+                var item = db.students.Where(g => g.StID == studentId).FirstOrDefault();
+                var student = new StudentViewModel();
+                student.StID = item.StID;
+                student.AssessmentId = assessmentId;
+                student.StudentName = item.StudentName;
+                student.StudentSurname = item.StudentSurname;
+                student.StudentGrade = item.StudentGrade;
+                stdList.Add(student);
+            }
+            return stdList;
         }
     }
 }
