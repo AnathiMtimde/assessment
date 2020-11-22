@@ -62,5 +62,82 @@ namespace DGSappSem2.Models.AssessmentBusiness
             }
             return assessmentVm;
         }
+
+        public int getSubjectTotal(int subjectId, int termId, int studentId)
+        {
+            var assessmentList = GetAssessments(subjectId, termId, studentId);
+            var subjectTotal = 0;
+
+            foreach(var assessment in assessmentList )
+            {
+                subjectTotal += assessment.ActualMark;
+            }
+            return subjectTotal;
+        }
+
+        public int getSubjectAverage(int subjectId, int termId, int classRoomId)
+        {
+            var db = new ApplicationDbContext();
+            var subjectAverage = 0;
+            var getStudentList = db.StudentClassRooms.Where(s => s.ClassRoomID == classRoomId).Select(s => s.StID).ToList();
+            foreach(var studentId in getStudentList)
+            {
+                subjectAverage += getSubjectTotal(subjectId, termId, studentId);
+            }
+            subjectAverage =(int) ((double)subjectAverage / (double)getStudentList.Count);
+            return subjectAverage;
+        }
+        public ReportVM getReportVM(int classRoomId,int studentId, int termId)
+        {
+            var db = new ApplicationDbContext();
+            var report = new ReportVM();
+            var getStudentDetails = db.students.Where(f => f.StID == studentId).FirstOrDefault();
+            report.StudentName = getStudentDetails.StudentName;
+            report.StudentSurname = getStudentDetails.StudentSurname;
+            report.GradeName = db.ClassRooms.Where(d => d.ClassRoomID == classRoomId).Select(g => g.GradeName).FirstOrDefault();
+            var subjectList = new List<SubjectVM>();
+            var getSubjectList = db.Subjects.Where(y => y.ClassRoomID == classRoomId).ToList();
+            foreach(var subject in getSubjectList)
+            {
+                var subjectDetails = new SubjectVM();
+                subjectDetails.SubjectName = subject.SubjectName;
+                subjectDetails.Mark = getSubjectTotal(subject.SubjectID, termId, studentId);
+                subjectDetails.Average = getSubjectAverage(subject.SubjectID, termId, classRoomId);
+                subjectDetails.Comment = getComment(subjectDetails.Mark);
+                subjectList.Add(subjectDetails);
+            }
+            report.subjectList = subjectList;
+            return report;
+        }
+        public string getComment(int mark)
+        {
+            var comment = "";
+           
+            if(mark <= 39)
+            {
+                comment = "Not Performed";
+            }
+            else if(mark >= 40 && mark <= 49)
+            {
+                comment = "Poor";
+            }
+            else if (mark >= 50 && mark <= 59)
+            {
+                comment = "Adequate";
+            }
+            else if (mark >= 60 && mark <= 69)
+            {
+                comment = "Satisfactory";
+            }
+            else if (mark >= 70 && mark <= 79)
+            {
+                comment = "Good";
+            }
+            else if (mark >= 80 )
+            {
+                comment = "Excellent";
+            }
+            return comment;
+        }
     }
 }

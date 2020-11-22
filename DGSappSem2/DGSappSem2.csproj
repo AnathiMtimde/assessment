@@ -232,6 +232,7 @@
     <Compile Include="Models\ViewModel\AssessmentList.cs" />
     <Compile Include="Models\ViewModel\ClassRoomList.cs" />
     <Compile Include="Models\ViewModel\ClassRoomSubjectList.cs" />
+    <Compile Include="Models\ViewModel\SubjectAverageVM.cs" />
     <Compile Include="Models\ViewModel\SubjectVM.cs" />
     <Compile Include="Models\ViewModel\TermList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -357,7 +358,7 @@
     <Content Include="Views\StudentAssessments\Edit.cshtml" />
     <Content Include="Views\StudentAssessments\Index.cshtml" />
     <Content Include="Views\StudentAssessments\DetailedReport.cshtml" />
-    <Content Include="Views\StudentAssessments\ClassReport.cshtml" />
+    <Content Include="Views\StudentAssessments\SummaryReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

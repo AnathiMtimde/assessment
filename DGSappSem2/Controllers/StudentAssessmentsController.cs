@@ -27,10 +27,10 @@ namespace DGSappSem2.Controllers
             var mtlist = report.GetReport(1, 1);
             return View(mtlist);
         }
-        public ActionResult ClassReport()
+        public ActionResult SummaryReport()
         {
             var report = new ReportLogic();
-            var mtlist = report.GetReport(1, 1);
+            var mtlist = report.getReportVM(1,1,1);
             return View(mtlist);
         }
         // GET: StudentAssessments/Details/5

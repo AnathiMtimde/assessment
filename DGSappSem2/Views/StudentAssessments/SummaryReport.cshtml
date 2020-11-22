@@ -1,0 +1,86 @@
+﻿@model DGSappSem2.Models.AssessmentBusiness.ReportVM
+
+@{
+
+    ViewBag.Title = "Summary Report";
+}
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+  /*  th, td {
+        border: 1px solid;
+        padding: 4px 8px;
+    }*/
+</style>
+@{ 
+    int plus(int h)
+    {
+        return h + 2;
+    }
+}
+<div class="form-group">
+   <table class="table">
+        <tr>
+            <td>
+                Name :
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.StudentName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Surname :
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.StudentSurname)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Grade :
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.GradeName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Term @Html.DisplayFor(model => model.TermName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayName("Subjects")
+            </th>
+            <th>
+                @Html.DisplayName("Total Mark")
+            </th>
+            <th>
+                @Html.DisplayName("Average")
+            </th>
+            <th>
+                @Html.DisplayName("Comment")
+            </th>
+        </tr>
+        @foreach (var subject in Model.subjectList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => subject.SubjectName)
+                </td><td>
+                    @Html.DisplayFor(model => subject.Mark)
+                </td><td>
+                    @Html.DisplayFor(model => subject.Average)
+                </td><td>
+                    @Html.DisplayFor(model => subject.Comment)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
