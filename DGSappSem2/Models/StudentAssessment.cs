@@ -9,7 +9,7 @@ using System.Web;
 
 namespace DGSappSem2.Models
 {
-    public class StudentAssessment
+    public class StudentAssessment  
     {
         [Key]
         public int StudentAssesmentID { get; set; }
@@ -19,6 +19,5 @@ namespace DGSappSem2.Models
         public virtual Assessment Assessment { get; set; }
         public int Mark { get; set; }
 
-        public virtual ICollection<Report> Reports { get; set; }
     }
 }

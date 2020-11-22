@@ -1,7 +1,3 @@
-C:\Users\KGClass\Desktop\School\DGSappSem2\obj\Debug\DGSappSem2.Migrations.InitialCreate.resources
-C:\Users\KGClass\Desktop\School\DGSappSem2\obj\Debug\DGSappSem2.Migrations.initialDb.resources
-C:\Users\KGClass\Desktop\School\DGSappSem2\obj\Debug\DGSappSem2.csproj.GenerateResource.cache
-C:\Users\KGClass\Desktop\School\DGSappSem2\obj\Debug\DGSappSem2.csproj.CoreCompileInputs.cache
 C:\Users\KGClass\Desktop\School\DGSappSem2\bin\DGSappSem2.dll.config
 C:\Users\KGClass\Desktop\School\DGSappSem2\bin\DGSappSem2.dll
 C:\Users\KGClass\Desktop\School\DGSappSem2\bin\DGSappSem2.pdb
@@ -112,8 +108,8 @@ C:\Users\KGClass\Desktop\School\DGSappSem2\bin\Microsoft.Owin.Security.Twitter.x
 C:\Users\KGClass\Desktop\School\DGSappSem2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\KGClass\Desktop\School\DGSappSem2\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\KGClass\Desktop\School\DGSappSem2\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\KGClass\Desktop\School\DGSappSem2\obj\Debug\DGSappSem2.csproj.CoreCompileInputs.cache
 C:\Users\KGClass\Desktop\School\DGSappSem2\obj\Debug\DGSappSem2.csproj.CopyComplete
 C:\Users\KGClass\Desktop\School\DGSappSem2\obj\Debug\DGSappSem2.dll
 C:\Users\KGClass\Desktop\School\DGSappSem2\obj\Debug\DGSappSem2.pdb
-C:\Users\KGClass\Desktop\School\DGSappSem2\obj\Debug\DGSappSem2.Migrations.hello.resources
 C:\Users\KGClass\Desktop\School\DGSappSem2\obj\Debug\DGSappSem2.csprojAssemblyReference.cache

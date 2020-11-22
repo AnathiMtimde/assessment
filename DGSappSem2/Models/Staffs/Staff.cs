@@ -55,7 +55,7 @@ namespace DGSappSem2.Models.Staffs
         [Required(ErrorMessage = "Enter staff's position")]
         public string Position { get; set; }
 
-        public virtual ICollection<Report> Reports { get; set; }
+        //public virtual ICollection<ReportVM> Reports { get; set; }
         public int ClassRoomID { get; set; }
         public virtual ClassRoom ClassRoom { get; set; }
 

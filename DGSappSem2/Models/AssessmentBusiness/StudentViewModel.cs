@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using DGSappSem2.Models.ViewModel;
 
 namespace DGSappSem2.Models.AssessmentBusiness
 {
     public class StudentViewModel
     {
-      
-
         public int StID { get; set; }
         public string StudentName { get; set; }
         public string StudentSurname { get; set; }
@@ -32,8 +28,8 @@ namespace DGSappSem2.Models.AssessmentBusiness
                 dbList.Add(classRoomList);
             }
           return dbList;
-        
-        }public static List<ClassRoomSubjectList> GetSubjectLists(int classRoomId)
+        }
+        public static List<ClassRoomSubjectList> GetSubjectLists(int classRoomId)
         {
             var db = new ApplicationDbContext();
             var dbList = new List<ClassRoomSubjectList>();

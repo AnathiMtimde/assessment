@@ -44,7 +44,7 @@ namespace DGSappSem2.Models
         public DbSet<Term> Terms { get; set; }
 
         public DbSet<StudentAssessment> StudentAssessments { get; set; }
-        public DbSet<Report> Reports { get; set; }
+        
       
         //__________________AssessmentBusiness____________________
        

@@ -1,0 +1,218 @@
+﻿@model DGSappSem2.Models.AssessmentBusiness.ReportVM
+
+@{
+
+    ViewBag.Title = "Detailed Report";
+}
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+  /*  th, td {
+        border: 1px solid;
+        padding: 4px 8px;
+    }*/
+</style>
+@{ 
+    int plus(int h)
+    {
+        return h + 2;
+    }
+}
+<div class="form-group">
+    @*<table class="table">
+            <tr>
+                <td>
+                    Name :
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.StudentName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Surname :
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.StudentSurname)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Grade :
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.GradeName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Term @Html.DisplayFor(model => model.TermName)
+                </td>
+            </tr>
+            <tr>
+                <th>
+
+                </th>
+
+                @foreach (var subject in Model.subjectList)
+                {
+
+
+                    <th colspan=@plus(@subject.assessments.Count)>
+                        @Html.DisplayFor(model => subject.SubjectName)
+                    </th>
+
+                }
+            </tr>
+            <tr>
+                <td></td>
+                @foreach (var subject in Model.subjectList)
+                {
+
+                    foreach (var assessment in subject.assessments)
+                    {
+
+                        <td>
+                            @Html.DisplayFor(model => assessment.AssessmentName)
+                        </td>
+                    }
+                    <td>Total</td>
+                }
+
+            </tr>
+
+            <tr>
+                <td>Contribution Percentage</td>
+                @foreach (var subject in Model.subjectList)
+                {
+                    int total = 0;
+                    foreach (var assessment in subject.assessments)
+                    {
+                        total += assessment.ContributionPercent;
+                        <td>
+                            @Html.DisplayFor(model => assessment.ContributionPercent)
+                        </td>
+                    }
+                    <td>
+                        @total
+                    </td>
+                }
+
+            </tr>
+            <tr>
+                <td>Actual Mark</td>
+                @foreach (var subject in Model.subjectList)
+                {
+                    int total = 0;
+                    foreach (var assessment in subject.assessments)
+                    {
+                        total += assessment.ActualMark;
+                        <td>
+                            @Html.DisplayFor(model => assessment.ActualMark)
+                        </td>
+                    }
+                    <td>
+                        @total
+                    </td>
+                }
+
+            </tr>
+
+        </table>*@
+
+    <table class="table">
+        <tr>
+            <td>
+                Name :
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.StudentName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Surname :
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.StudentSurname)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Grade :
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.GradeName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Term @Html.DisplayFor(model => model.TermName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayName("Subjects")
+            </th>
+            <th>
+                @Html.DisplayName("Assessment Name")
+            </th>
+            <th>
+                @Html.DisplayName("Contribution Percentage")
+            </th>
+            <th>
+                @Html.DisplayName("Actual Mark")
+            </th>
+        </tr>
+        @foreach (var subject in Model.subjectList)
+        {
+            var contrTot = 0;
+            var actualTot = 0;
+            <tr>
+                <td rowspan=@plus(@subject.assessments.Count)>
+                    @Html.DisplayFor(model => subject.SubjectName)
+                </td>
+
+            </tr>
+            foreach (var assessment in subject.assessments)
+            {
+                contrTot += assessment.ContributionPercent;
+                actualTot += assessment.ActualMark;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => assessment.AssessmentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => assessment.ContributionPercent)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => assessment.ActualMark)
+                    </td>
+                </tr>
+            }
+            <tr>
+
+                <td>
+                    @Html.DisplayName("Total")
+                </td>
+
+                <td>
+                    @Html.DisplayName(contrTot.ToString())
+                </td>
+                <td>
+                    @Html.DisplayName(actualTot.ToString())
+                </td>
+
+            </tr>
+
+        }
+
+
+
+    </table>
+</div>
+

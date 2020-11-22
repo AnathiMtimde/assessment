@@ -193,7 +193,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
-    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\StaffAttendancesController.cs" />
     <Compile Include="Controllers\StaffsController.cs" />
     <Compile Include="Controllers\StudentAssessmentsController.cs" />
@@ -205,22 +204,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011111949190_InitialCreate.cs" />
-    <Compile Include="Migrations\202011111949190_InitialCreate.Designer.cs">
-      <DependentUpon>202011111949190_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011112049505_initialDb.cs" />
-    <Compile Include="Migrations\202011112049505_initialDb.Designer.cs">
-      <DependentUpon>202011112049505_initialDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011122028051_hello.cs" />
-    <Compile Include="Migrations\202011122028051_hello.Designer.cs">
-      <DependentUpon>202011122028051_hello.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AssessmentBusiness\Assessment.cs" />
-    <Compile Include="Models\AssessmentBusiness\Report.cs" />
+    <Compile Include="Models\ViewModel\AssessmentVM.cs" />
+    <Compile Include="Models\AssessmentBusiness\ReportLogic.cs" />
+    <Compile Include="Models\AssessmentBusiness\ReportVM.cs" />
     <Compile Include="Models\AssessmentBusiness\StudentViewModel.cs" />
     <Compile Include="Models\AssessmentBusiness\ClassRoom.cs" />
     <Compile Include="Models\AssessmentBusiness\Term.cs" />
@@ -243,6 +232,7 @@
     <Compile Include="Models\ViewModel\AssessmentList.cs" />
     <Compile Include="Models\ViewModel\ClassRoomList.cs" />
     <Compile Include="Models\ViewModel\ClassRoomSubjectList.cs" />
+    <Compile Include="Models\ViewModel\SubjectVM.cs" />
     <Compile Include="Models\ViewModel\TermList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -366,11 +356,8 @@
     <Content Include="Views\StudentAssessments\Details.cshtml" />
     <Content Include="Views\StudentAssessments\Edit.cshtml" />
     <Content Include="Views\StudentAssessments\Index.cshtml" />
-    <Content Include="Views\Reports\Create.cshtml" />
-    <Content Include="Views\Reports\Delete.cshtml" />
-    <Content Include="Views\Reports\Details.cshtml" />
-    <Content Include="Views\Reports\Edit.cshtml" />
-    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\StudentAssessments\DetailedReport.cshtml" />
+    <Content Include="Views\StudentAssessments\ClassReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -387,17 +374,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011111949190_InitialCreate.resx">
-      <DependentUpon>202011111949190_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011112049505_initialDb.resx">
-      <DependentUpon>202011112049505_initialDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011122028051_hello.resx">
-      <DependentUpon>202011122028051_hello.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

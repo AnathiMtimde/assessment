@@ -21,7 +21,18 @@ namespace DGSappSem2.Controllers
             var studentAssessments = db.StudentAssessments.Include(s => s.Assessment).Include(s => s.Student);
             return View(studentAssessments.ToList());
         }
-
+        public ActionResult DetailedReport()
+        {
+            var report =new ReportLogic();
+            var mtlist = report.GetReport(1, 1);
+            return View(mtlist);
+        }
+        public ActionResult ClassReport()
+        {
+            var report = new ReportLogic();
+            var mtlist = report.GetReport(1, 1);
+            return View(mtlist);
+        }
         // GET: StudentAssessments/Details/5
         public ActionResult Details(int? id)
         {
@@ -70,10 +81,19 @@ namespace DGSappSem2.Controllers
                 foreach (var item in studentVms)
                 {
                     var studentAssessment = new StudentAssessment();
-                    studentAssessment.StID = item.StID;
-                    studentAssessment.AssessmentID = item.AssessmentId;
-                    studentAssessment.Mark = item.Mark;
-                    db.StudentAssessments.Add(studentAssessment);
+                    var getMark = db.StudentAssessments.Where(c => c.StID == item.StID && c.AssessmentID == item.AssessmentId).FirstOrDefault();
+                    if (getMark != null)
+                    {
+                        getMark.Mark = item.Mark;
+                        db.Entry(getMark).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        studentAssessment.StID = item.StID;
+                        studentAssessment.AssessmentID = item.AssessmentId;
+                        studentAssessment.Mark = item.Mark;
+                        db.StudentAssessments.Add(studentAssessment);
+                    }
                     db.SaveChanges();
                 }
             }

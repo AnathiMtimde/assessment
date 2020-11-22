@@ -51,24 +51,32 @@ namespace DGSappSem2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Create([Bind(Include = "AssessmentID,AssessmentName,ContributionPercent,TermID,SubjectID")] Assessment assessment)
+        public ActionResult Create( Assessment assessment)
         {
             ViewBag.SubjectID = new SelectList(db.Subjects, "SubjectID", "SubjectName");
             ViewBag.TermID = new SelectList(db.Terms, "TermID", "Name");
             if (ModelState.IsValid)
             {
-                var existingPercentage = db.Assessments.Where(x => x.SubjectID == assessment.SubjectID && x.TermID == assessment.TermID).Select(s=>s.ContributionPercent).Sum();
-                if (100 >= (existingPercentage + assessment.ContributionPercent))
+                var existingAssessments = db.Assessments.Where(x => x.SubjectID == assessment.SubjectID && x.TermID == assessment.TermID).FirstOrDefault();
+                if (existingAssessments != null)
+                {
+                    var existingPercentage = db.Assessments.Where(x => x.SubjectID == assessment.SubjectID && x.TermID == assessment.TermID).Select(s => s.ContributionPercent).Sum();
+                    if (100 >= (existingPercentage + assessment.ContributionPercent))
+                    {
+                        db.Assessments.Add(assessment);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Your total contribution percentage must be equal to 100% ");
+                        return View();
+                    }
+                }
+                else
                 {
                     db.Assessments.Add(assessment);
                     db.SaveChanges();
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Your total contribution percentage must be equal to 100% ");
-                    return View();
-                }
-              
                 return RedirectToAction("Index");
             }
 

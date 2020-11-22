@@ -11,7 +11,6 @@ namespace DGSappSem2.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
-            ContextKey = "DGSappSem2.Models.ApplicationDbContext";
         }
 
         protected override void Seed(DGSappSem2.Models.ApplicationDbContext context)
