@@ -1,0 +1,68 @@
+﻿@model IEnumerable<AssessmentBusiness.Assessment>
+@*<style>
+    .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .button2 {
+        background-color: teal;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>*@
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Assessments</h2>
+<h3>@ViewBag.gradeName / @ViewBag.subjectName / Term @ViewBag.termName /</h3>
+
+<p>
+    <a href="@Url.Action("Create", "Assessments", new { subjectId = @ViewBag.subjectID, termId = @ViewBag.termID,  gradeName =  @ViewBag.gradeName, termName = @ViewBag.termName, subjectName = @ViewBag.subjectName})">Create New Assessment </a>
+
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table" >
+    <tr>     
+        <th>
+            @Html.DisplayNameFor(model => model.AssessmentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContributionPercent)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssessmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContributionPercent)
+            </td>
+            <td>
+                <a class="fa fa-edit" href="@Url.Action("Create", "StudentAssessments", new { classRoomId = item.Subject.ClassRoomID, assessmentId = item.AssessmentID})"> Capture Marks </a> ||
+                <a class="fa fa-eye" href="@Url.Action("MarksList", "StudentAssessments", new { classRoomId = item.Subject.ClassRoomID, assessmentId = item.AssessmentID})"><b> View Marks </b></a>
+
+            </td>
+        </tr>
+    }
+
+</table>

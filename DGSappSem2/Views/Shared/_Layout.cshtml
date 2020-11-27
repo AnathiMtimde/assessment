@@ -1,84 +1,203 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-<link href="~/Content/Site.css" rel="stylesheet" />
-</head>
-<body>
-    
-    <div class="sidenav">
-        @{
-            var classRoomList = @DGSappSem2.Models.AssessmentBusiness.StudentViewModel.getClassRoomList();
-
-        }
-
-        @foreach (var item in classRoomList)
-        {
-            <button class="dropdown-btn">
-                @item.GradeName
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-container">
-                @foreach (var itemSubject in item.ClassRoomSubjectLists)
-                {< <button class="dropdown-btn">
-                        @itemSubject.SubjectName
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                   <div class="dropdown-container">
-                       @foreach (var itemTerm in itemSubject.TermLists)
-                       {< <button class="dropdown-btn">
-                               Term  @itemTerm.Name
-                               <i class="fa fa-caret-down"></i>
-                           </button>
-                          <div class="dropdown-container">
-                              @foreach (var itemAssessment in itemTerm.AssessmentLists)
-                              {< <button class="dropdown-btn">
-                                     <a href="@Url.Action("Create","StudentAssessments", new { classroomId = item.ClassRoomID, assessmentId = itemAssessment.AssessmentID })">
-                                         @itemAssessment.AssessmentName
-                                     </a>         
-                             
-                                      <i class="fa fa-caret-down"></i>
-                                  </button>
-                              }
-                              </div>
-                               }
-                           </div>
-                       }
-                   </div>
-                }
-            </div>
-    <div  class="container main body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
+    @using System.Web.Optimization
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+
+        fieldset {
+            width: 90%;
+            border-bottom: 1px solid #b7b7b7;
+            margin-bottom: 15px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .link {
+            text-decoration: none;
+        }
+
+        .tabs {
+            padding-top: 2%;
+            margin-left: 15%;
+        }
+
+            .tabs span {
+                display: inline-block;
+                padding-right: 4px;
+            }
+
+        strong span {
+            display: inline-block;
+            padding-right: 6px;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>High School App</title>
+
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <link href="~/Content1/AdminLayout/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content1/AdminLayout/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content1/AdminLayout/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="~/Content1/AdminLayout/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content1/AdminLayout/css/widgets.css" rel="stylesheet" />
+    <link href="~/Content1/AdminLayout/css/style.css" rel="stylesheet" />
+    <link href="~/Content1/AdminLayout/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" />
+
+    <link href="~/Content1/AdminLayout/css/owl.carousel.css" rel="stylesheet" />
+
+</head>
+<body>
+    @{
+        var classRoomList = @DGSappSem2.Models.AssessmentBusiness.StudentViewModel.getClassRoomList();
+
+    }
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+
+            <div class="navbar-collapse collapse">
+                <h4 class="nav navbar-nav">
+                   Tel: 031- 9074566
+                    <br />
+                    <br />
+                    Email: DGSS@gmail.com
+                </h4>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div>
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse blue-bg">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu">
+                    <li class="active">
+                        <a href="">
+                            <i class="icon_house_alt"></i>
+                            <span>High School App</span>
+                        </a>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-file-text"></i>
+                            <span>Marks </span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+
+                        <ul class="sub">
+                            @foreach (var item in classRoomList)
+                            {
+
+                                <li><a href="@Url.Action("SubjectList","Subjects", new {classroomId = item.ClassRoomID,gradeName = item.GradeName })">@item.GradeName </a></li>
+                                
+                                    }
+                                </ul>
+
+
+                    </li> 
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-file"></i>
+                            <span>Reports </span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+
+                        <ul class="sub">
+                            @foreach (var item in classRoomList)
+                            {
+
+                                <li><a href="@Url.Action("StudentList","StudentAssessments", new {classroomId = item.ClassRoomID,gradeName = item.GradeName })">@item.GradeName </a></li>
+                                
+                                    }
+                                </ul>
+
+
+                    </li>
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+    </div>
+    <div class="container body-content">
+        <div style=" margin-bottom:10%"></div>
+        @RenderBody()
+
+        <script src="~/Content1/AdminLayout/js/jquery-ui-1.9.2.custom.min.js"></script>
+        <script src="~/Content1/AdminLayout/js/bootstrap.min.js"></script>
+        <script src="~/Content1/AdminLayout/js/jquery.scrollTo.min.js"></script>
+        <script src="~/Content1/AdminLayout/js/jquery.nicescroll.js"></script>
+        <script src="~/Content1/AdminLayout/js/jquery.sparkline.js"></script>
+        <script src="~/Content1/AdminLayout/js/owl.carousel.js"></script>
+        <script src="~/Content1/AdminLayout/assets/jquery-knob/js/jquery.knob.js"></script>
+        <script src="~/Content1/AdminLayout/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+        <script src="~/Content1/AdminLayout/js/jquery.slimscroll.min.js"></script>
+        <script src="~/Content1/AdminLayout/js/charts.js"></script>
+        <script src="~/Content1/AdminLayout/js/sparklines.js"></script>
+        <script src="~/Content1/AdminLayout/js/morris.min.js"></script>
+        <script src="~/Content1/AdminLayout/js/gdp-data.js"></script>
+        <script src="~/Content1/AdminLayout/js/jquery.placeholder.min.js"></script>
+        <script src="~/Content1/AdminLayout/js/jquery.autosize.min.js"></script>
+        <script src="~/Content1/AdminLayout/js/xcharts.min.js"></script>
+        <script src="~/Content1/AdminLayout/js/easy-pie-chart.js"></script>
+        <script src="~/Content1/AdminLayout/js/sparkline-chart.js"></script>
+        <script src="~/Content1/AdminLayout/js/scripts.js"></script>
+        <script src="~/Content1/AdminLayout/js/jquery.customSelect.min.js"></script>
+        <script src="~/Content1/AdminLayout/js/jquery.rateit.min.js"></script>
+        <script src="~/Content1/AdminLayout/assets/chart-master/Chart.js"></script>
+
+        <script>
+            //knob
+            $(function () {
+                $(".knob").knob({
+                    'draw': function () {
+                        $(this.i).val(this.cv + '%')
+                    }
+                })
+            });
+
+            //carousel
+            $(document).ready(function () {
+                $("#owl-slider").owlCarousel({
+                    navigation: true,
+                    slideSpeed: 300,
+                    paginationSpeed: 400,
+                    singleItem: true
+
+                });
+            });
+
+            //custom select box
+
+            $(function () {
+                $('select.styled').customSelect();
+            });
+
+            /* ---------- Map ---------- */
+            $(function () {
+                $('#map').vectorMap({
+                    map: 'world_mill_en',
+                    series: {
+                        regions: [{
+                            values: gdpData,
+                            scale: ['#000', '#000'],
+                            normalizeFunction: 'polynomial'
+                        }]
+                    },
+                    backgroundColor: '#eef3f7',
+                    onLabelShow: function (e, el, code) {
+                        el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
+                    }
+                });
+            });</script>
+        </div>
 </body>
 </html>
-
-<script>
-/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
-
-for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
-  this.classList.toggle("active");
-  var dropdownContent = this.nextElementSibling;
-  if (dropdownContent.style.display === "block") {
-  dropdownContent.style.display = "none";
-  } else {
-  dropdownContent.style.display = "block";
-  }
-  });
-}
-</script>

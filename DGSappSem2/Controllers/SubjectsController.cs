@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using AssessmentBusiness;
 using DGSappSem2.Models;
+using DGSappSem2.Models.ViewModel;
 
 namespace DGSappSem2.Controllers
 {
@@ -20,6 +21,24 @@ namespace DGSappSem2.Controllers
         {
             var subjects = db.Subjects.Include(s => s.ClassRoom);
             return View(subjects.ToList());
+        } 
+        public ActionResult SubjectList(int classRoomId, string gradeName)
+        {
+            ViewBag.gradeName = gradeName;
+            ViewBag.classRoomId = classRoomId;
+            var subjects = db.Subjects.Include(s => s.ClassRoom).Where(c=>c.ClassRoomID == classRoomId);
+            var subjectList = new List<SubjectVM>();
+            var termList = db.Terms.ToList();
+            foreach (var subject in subjects)
+            {
+                var subjectVM = new SubjectVM();
+                subjectVM.SubjectID = subject.SubjectID;
+                subjectVM.SubjectName = subject.SubjectName;
+                subjectVM.RequirementPercentage = subject.RequiredPercentage;
+                subjectVM.termLists = termList;
+                subjectList.Add(subjectVM);
+            }
+            return View(subjectList);
         }
 
         // GET: Subjects/Details/5
@@ -38,9 +57,9 @@ namespace DGSappSem2.Controllers
         }
 
         // GET: Subjects/Create
-        public ActionResult Create()
+        public ActionResult Create(int classRoomId)
         {
-            ViewBag.ClassRoomID = new SelectList(db.ClassRooms, "ClassRoomID", "GradeName");
+            ViewBag.classRoomId = classRoomId;
             return View();
         }
 

@@ -10,10 +10,29 @@
         border-collapse: collapse;
     }
 
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+    th {
+        background-color: #77b5ba;
+        color: white !important;
+    }
+
+
   /*  th, td {
         border: 1px solid;
         padding: 4px 8px;
     }*/
+    hr {
+        display: block;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        margin-left: auto;
+        margin-right: auto;
+        border-style: inset;
+        border-width: 1px;
+    } 
 </style>
 @{ 
     int plus(int h)
@@ -122,37 +141,19 @@
             </tr>
 
         </table>*@
+    <h4>  Name :  @Html.DisplayFor(model => model.StudentName)</h4>
+    <br />
 
+    <h4>   Surname : @Html.DisplayFor(model => model.StudentSurname)</h4>
+    <br />
+
+    <h4>  Grade :   @Html.DisplayFor(model => model.GradeName)</h4>
+    <br />
+
+    <h4>  Term @Html.DisplayFor(model => model.TermName)</h4>
+    <hr />
     <table class="table">
-        <tr>
-            <td>
-                Name :
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.StudentName)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Surname :
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.StudentSurname)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Grade :
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.GradeName)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Term @Html.DisplayFor(model => model.TermName)
-            </td>
-        </tr>
+
         <tr>
             <th>
                 @Html.DisplayName("Subjects")

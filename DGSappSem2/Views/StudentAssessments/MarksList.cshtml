@@ -1,0 +1,80 @@
+﻿@model List<DGSappSem2.Models.AssessmentBusiness.StudentViewModel>
+<style>
+    .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+@{
+
+    ViewBag.Title = "Create";
+}
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+
+<h2> @ViewBag.AssessmentName </h2>
+<br />
+<h3>@ViewBag.gradeName / @ViewBag.subjectName / Term @ViewBag.termName /</h3>
+<br />
+
+     <div class="form-group">
+         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+         <table class="table">
+             <tr>
+
+
+                 <th>
+                     @Html.DisplayName("Student ID")
+                 </th>
+
+                 <th>
+                     @Html.DisplayName("Name")
+                 </th>
+                 <th>
+                     @Html.DisplayName("Surname")
+                 </th>
+                 <th>
+                     @Html.DisplayName("Provide Mark")
+                 </th>
+
+             </tr>
+
+
+             @for (int i = 0; i < Model.Count(); i++)
+             {
+                 <tr>
+
+
+                     @Html.HiddenFor(model => model[i].StID)
+                     @Html.HiddenFor(model => model[i].AssessmentId)
+
+
+                     <td>
+                         @Html.DisplayFor(model => model[i].StID)
+                     </td>
+
+                     <td>
+                         @Html.DisplayFor(model => model[i].StudentName)
+                     </td>
+                     <td>
+                         @Html.DisplayFor(model => model[i].StudentSurname)
+                     </td>
+                     <td>
+                         @Html.DisplayFor(model => model[i].Mark)
+                     </td>
+                 </tr>
+             }
+
+         </table>
+
+         <div>
+             <a href="@Url.Action("AssessmentList", "Assessments", new { subjectId = @ViewBag.subjectID, termId = @ViewBag.termID,  gradeName =  @ViewBag.gradeName, termName = @ViewBag.termName, subjectName = @ViewBag.subjectName})" class="btn btn-default">Back to Assessments </a>
+         </div>
+         </div>

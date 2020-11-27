@@ -1,0 +1,67 @@
+﻿@model IEnumerable<DGSappSem2.Models.ViewModel.studentVM>
+<style>
+    .button {
+        background-color: #77b5ba;
+        border: none;
+        color: white;
+        padding: 5px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .button2 {
+        background-color: teal;
+        border: none;
+        color: white;
+        padding: 5px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    </style>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2> @ViewBag.gradeName - Report</h2>
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("Surname")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentSurname)
+        </td>
+        @foreach (var term in item.termLists)
+        {
+    <td>
+        <a class="button" href="@Url.Action("DetailedReport", "StudentAssessments", new { studentId = item.StID, termId = term.TermID})">Term @term.Name Detailed</a>
+        <a class="button2" href="@Url.Action("SummaryReport", "StudentAssessments", new { classRoomId=@ViewBag.classRoomId,studentId = item.StID, termId = term.TermID})">Term @term.Name Summary</a>
+
+    </td>
+        }
+    </tr>
+}
+
+</table>

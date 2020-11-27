@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AssessmentBusiness;
+using System.Collections.Generic;
 
 namespace DGSappSem2.Models.ViewModel
 {
@@ -11,6 +12,7 @@ namespace DGSappSem2.Models.ViewModel
         public int Mark { get; set; }
         public string Comment { get; set; }
 
+        public List<Term> termLists { get; set; }
         public List<AssessmentVM> assessments { get; set; }
     }
     

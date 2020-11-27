@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DGSappSem2.Models;
 using DGSappSem2.Models.AssessmentBusiness;
+using DGSappSem2.Models.ViewModel;
 
 namespace DGSappSem2.Controllers
 {
@@ -21,16 +22,35 @@ namespace DGSappSem2.Controllers
             var studentAssessments = db.StudentAssessments.Include(s => s.Assessment).Include(s => s.Student);
             return View(studentAssessments.ToList());
         }
-        public ActionResult DetailedReport()
+        public ActionResult DetailedReport(int studentId, int termId)
         {
             var report =new ReportLogic();
-            var mtlist = report.GetReport(1, 1);
+            var mtlist = report.GetReport(studentId, termId);
             return View(mtlist);
         }
-        public ActionResult SummaryReport()
+        public ActionResult StudentList(int classRoomId, string gradeName)
+        {
+            ViewBag.gradeName = gradeName;
+            ViewBag.classRoomId = classRoomId;
+            var students = db.StudentClassRooms.Where(c => c.ClassRoomID == classRoomId).ToList();
+            var studentList = new List<studentVM>();
+            var termList = db.Terms.ToList();
+            foreach (var student in students)
+            {
+                var studentProfile = db.students.Where(h => h.StID == student.StID).FirstOrDefault();
+                var student1 = new studentVM();
+                student1.StID = student.StID;
+                student1.StudentName = studentProfile.StudentName;
+                student1.StudentSurname = studentProfile.StudentSurname;
+                student1.termLists = termList;
+                studentList.Add(student1);
+            }
+            return View(studentList);
+        }
+        public ActionResult SummaryReport(int classroomId,int studentId,int termId)
         {
             var report = new ReportLogic();
-            var mtlist = report.getReportVM(1,1,1);
+            var mtlist = report.getReportVM(classroomId,studentId,termId);
             return View(mtlist);
         }
         // GET: StudentAssessments/Details/5
@@ -57,6 +77,18 @@ namespace DGSappSem2.Controllers
             ViewBag.GradeName = db.ClassRooms.Where(d => d.ClassRoomID == classroomId).Select(d => d.GradeName).FirstOrDefault();
             ViewBag.Subject = db.Assessments.Where(d => d.AssessmentID == assessmentId).Select(d => d.Subject.SubjectName).FirstOrDefault();
             ViewBag.Term = db.Assessments.Where(d => d.AssessmentID == assessmentId).Select(d => d.Term.Name).FirstOrDefault();
+            return View(GetStudents(classroomId,assessmentId));
+        }
+        public ActionResult MarksList(int classroomId, int assessmentId)
+        {
+            ViewBag.ClassroomId = classroomId;
+            ViewBag.AssessmentId = assessmentId;
+            ViewBag.AssessmentName = db.Assessments.Where(c => c.AssessmentID == assessmentId).Select(c=>c.AssessmentName).FirstOrDefault();
+            ViewBag.gradeName = db.ClassRooms.Where(d => d.ClassRoomID == classroomId).Select(d => d.GradeName).FirstOrDefault();
+            ViewBag.subjectName = db.Assessments.Where(d => d.AssessmentID == assessmentId).Select(d => d.Subject.SubjectName).FirstOrDefault();  
+            ViewBag.subjectId = db.Assessments.Where(d => d.AssessmentID == assessmentId).Select(d => d.Subject.SubjectID).FirstOrDefault();
+            ViewBag.termName = db.Assessments.Where(d => d.AssessmentID == assessmentId).Select(d => d.Term.Name).FirstOrDefault();
+            ViewBag.termId = db.Assessments.Where(d => d.AssessmentID == assessmentId).Select(d => d.Term.TermID).FirstOrDefault();
             return View(GetStudents(classroomId,assessmentId));
         }
 
@@ -188,12 +220,14 @@ namespace DGSappSem2.Controllers
             foreach (var studentId in classroomStudents)
             {
                 var item = db.students.Where(g => g.StID == studentId).FirstOrDefault();
+                var mark = db.StudentAssessments.Where(g => g.StID == studentId && g.AssessmentID == assessmentId).Select(j=>j.Mark).FirstOrDefault();
                 var student = new StudentViewModel();
                 student.StID = item.StID;
                 student.AssessmentId = assessmentId;
                 student.StudentName = item.StudentName;
                 student.StudentSurname = item.StudentSurname;
                 student.StudentGrade = item.StudentGrade;
+                student.Mark = mark; 
                 stdList.Add(student);
             }
             return stdList;

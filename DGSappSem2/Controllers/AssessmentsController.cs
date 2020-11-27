@@ -20,6 +20,16 @@ namespace DGSappSem2.Controllers
         {
             var assessments = db.Assessments.Include(a => a.Subject).Include(a => a.Term);
             return View(assessments.ToList());
+        } 
+        public ActionResult AssessmentList(int subjectId, int termId, string gradeName, string termName, string subjectName)
+        {
+            ViewBag.gradeName = gradeName;
+            ViewBag.termName = termName;
+            ViewBag.subjectName = subjectName;
+            ViewBag.subjectId = subjectId;
+            ViewBag.termId = termId;
+            var assessments = db.Assessments.Include(a => a.Subject).Include(a => a.Term).Where(h=>h.SubjectID == subjectId && h.TermID == termId);
+            return View(assessments.ToList());
         }
 
         // GET: Assessments/Details/5
@@ -38,10 +48,13 @@ namespace DGSappSem2.Controllers
         }
 
         // GET: Assessments/Create
-        public ActionResult Create()
+        public ActionResult Create(int subjectId, int termId, string gradeName, string termName, string subjectName)
         {
-            ViewBag.SubjectID = new SelectList(db.Subjects, "SubjectID", "SubjectName");
-            ViewBag.TermID = new SelectList(db.Terms, "TermID", "Name");
+            ViewBag.gradeName = gradeName;
+            ViewBag.termName = termName;
+            ViewBag.subjectName = subjectName;
+            ViewBag.SubjectID = subjectId;
+            ViewBag.TermID = termId;
             return View();
         }
 
